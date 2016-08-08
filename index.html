@@ -55,32 +55,32 @@
         
         <link href="https://www.export.gov/resource/1469529283000/Favicons/Favicons/export.ico" rel="shortcut icon" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet" />
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+<style type="text/css">
+  
+a:focus,div:focus {
+  background-color: yellow;
+}
 
+.skip {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+  overflow: hidden;
+}
 
-  ga('create', 'UA-80120252-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-28628707-1']);
-  _gaq.push(['_setDomainName', '.export.gov']);
-  _gaq.push(['_trackPageview']);
-setTimeout("_gaq.push(['_trackEvent', '10_seconds', 'read'])",10000);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
-<script id="_fed_an_ua_tag" language="javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOC&amp;subagency=ITA"></script>
+a.skip:active, 
+a.skip:focus, 
+a.skip:hover {
+  left: 0; 
+  top: 0;
+  width: auto; 
+  height: auto; 
+  overflow: visible; 
+}
+</style>
     </head>
     <body class="front no-trans">
         
@@ -91,7 +91,7 @@ setTimeout("_gaq.push(['_trackEvent', '10_seconds', 'read'])",10000);
         
         <div class="page-wrapper">
 
-            
+        <a href="#content" class="skip">Skip to content</a>    
              
              
             
@@ -392,7 +392,7 @@ setTimeout("_gaq.push(['_trackEvent', '10_seconds', 'read'])",10000);
 
                 </div>
             </header>
-            <div class="main">
+            <div id="content" class="main">
             <div style="background-image: url(&quot;/servlet/servlet.FileDownload?file=015t0000000LKDsAAO&quot;); background-repeat:no-repeat; background-size: cover;">
                 <div class="section clearfix primary-bg-ita-img">
                 <div>
@@ -697,7 +697,29 @@ $(window).load(function() {processPage();});
     });
 </script>
 
-
+<script>
+  $( document ).ready(function() {
+  
+  // bind a click event to the 'skip' link
+  $(".skip").click(function(event){
+    
+    // strip the leading hash and declare
+    // the content we're skipping to
+    var skipTo="#"+this.href.split('#')[1];
+    
+    // Setting 'tabindex' to -1 takes an element out of normal 
+    // tab flow but allows it to be focused via javascript
+    $(skipTo).attr('tabindex', -1).on('blur focusout', function () {
+      
+      // when focus leaves this element, 
+      // remove the tabindex attribute
+      $(this).removeAttr('tabindex');
+      
+    }).focus(); // focus on the content container
+  });
+  
+});
+</script>
 
 </body>
 </html>
